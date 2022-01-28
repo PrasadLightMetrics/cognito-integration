@@ -35,5 +35,10 @@ export class AuthServiceService {
     console.log(this.constructQueryParam(authorizationParams))
     window.location.href = `https://todo-app-users.auth.us-east-1.amazoncognito.com/login?${this.constructQueryParam(authorizationParams)}`;
   }
+
+  public async logout() {
+    const authorizationParams = await this.getAuthorizationParams();
+    window.location.href = `https://todo-app-users.auth.us-east-1.amazoncognito.com/login?${this.constructQueryParam(authorizationParams)}`;
+  }
   
 }

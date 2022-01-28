@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthServiceService } from '../../services/auth-service.service';
 
 @Component({
@@ -10,7 +10,8 @@ import { AuthServiceService } from '../../services/auth-service.service';
 export class LoginPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthServiceService
+    private authService: AuthServiceService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +30,7 @@ export class LoginPageComponent implements OnInit {
         code,
       };
       console.log({ params });
+      this.router.navigateByUrl('home');
       // this.authService.intermediateServerLogin(params).subscribe((res: any) => {
       //   const loginInfo = { ...res };
 
