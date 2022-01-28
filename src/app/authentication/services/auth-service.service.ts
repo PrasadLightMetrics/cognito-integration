@@ -33,12 +33,12 @@ export class AuthServiceService {
   public async authorizeUser() {
     const authorizationParams = await this.getAuthorizationParams();
     console.log(this.constructQueryParam(authorizationParams))
-    window.location.href = `https://todo-app-users.auth.us-east-1.amazoncognito.com/login?${this.constructQueryParam(authorizationParams)}`;
+    window.location.href = `https://todo-app-users.auth.us-east-1.amazoncognito.com/oauth2/authorize?${this.constructQueryParam(authorizationParams)}`;
   }
 
   public async logout() {
     const authorizationParams = await this.getAuthorizationParams();
-    window.location.href = `https://todo-app-users.auth.us-east-1.amazoncognito.com/login?${this.constructQueryParam(authorizationParams)}`;
+    window.location.href = `https://todo-app-users.auth.us-east-1.amazoncognito.com/logout?${this.constructQueryParam(authorizationParams)}`;
   }
   
 }
