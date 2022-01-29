@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   private constructQueryParam(query: { [key: string]: any }) {
     return Object.entries(query)
@@ -39,6 +42,10 @@ export class AuthServiceService {
   public async logout() {
     const authorizationParams = await this.getAuthorizationParams();
     window.location.href = `https://todo-app-users.auth.us-east-1.amazoncognito.com/logout?${this.constructQueryParam(authorizationParams)}`;
+  }
+
+  public intermediateServerLogin(params: any): Observable<any> {
+    return this.http.post(`http://localhost:5000/authenticate`, params);
   }
   
 }

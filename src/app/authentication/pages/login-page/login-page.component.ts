@@ -29,12 +29,19 @@ export class LoginPageComponent implements OnInit {
         customerName: '',
         code,
       };
-      console.log({ params });
-      this.router.navigateByUrl('home');
-      // this.authService.intermediateServerLogin(params).subscribe((res: any) => {
-      //   const loginInfo = { ...res };
+      
+      this.authService.intermediateServerLogin(params).subscribe(
+        (res: any) => {
+          const loginInfo = { ...res };
+          // const { loginName = '', fleetId = '', customerName = '' } = loginInfo || {};
+          console.log(loginInfo)
+        },
+        () => {
+          this.authService.logout();
+        }
+      );
 
-      // });
+      this.router.navigateByUrl('home');
     } else {
       this.authService.authorizeUser();
     }
