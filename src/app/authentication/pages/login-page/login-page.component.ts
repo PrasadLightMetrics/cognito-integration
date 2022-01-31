@@ -26,8 +26,7 @@ export class LoginPageComponent implements OnInit {
   private validateCode({code} : { code: any}) {
     if (code) {
       const params = {
-        customerName: '',
-        code,
+        code        
       };
       
       this.authService.intermediateServerLogin(params).subscribe(
