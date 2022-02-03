@@ -26,21 +26,26 @@ export class LoginPageComponent implements OnInit {
   private validateCode({code} : { code: any}) {
     if (code) {
       const params = {
-        code        
+        code  
       };
       
       this.authService.intermediateServerLogin(params).subscribe(
         (res: any) => {
           const loginInfo = { ...res };
           // const { loginName = '', fleetId = '', customerName = '' } = loginInfo || {};
-          console.log(loginInfo)
+          console.log(loginInfo.userDetails.body)
+          if(loginInfo.userDetails.body.error === "invalid_token")
+          {
+            this.authService.logout();
+          }
+          else{
+            this.router.navigateByUrl('home');
+          }
         },
-        () => {
-          this.authService.logout();
-        }
+        
       );
 
-      this.router.navigateByUrl('home');
+      
     } else {
       this.authService.authorizeUser();
     }
